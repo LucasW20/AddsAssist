@@ -3,6 +3,12 @@ package LifeTracker;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+/***
+ * Test cases for the Character class
+ * 
+ * @author Lucas_C_Wright
+ *
+ */
 public class CharacterTest {
 
 	@Test
