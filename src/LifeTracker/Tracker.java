@@ -13,7 +13,7 @@ import javafx.scene.text.Text;
  * 
  * @author Lucas_C_Wright
  * @start 05-03-21
- * @version 05-03-21
+ * @version 01-13-22
  */
 public class Tracker extends GridPane {
 	private Character charGUI;
@@ -40,23 +40,26 @@ public class Tracker extends GridPane {
 		addTempInteractables();
 	}
 	
-	public Character getChar() {
-		return charGUI;
-	}
+	//returns the character that this class uses for its information
+	public Character getChar() { return charGUI; }
 
+	//sets up the information from the character that doesn't change in the GUI
 	private void addInfo() {
+		//setup the name
 		Text tName = new Text(charGUI.getName());
 		tName.setStyle("-fx-font: 20 ariel;");
 		GridPane.setColumnSpan(tName, 5);
 		GridPane.setHalignment(tName, HPos.CENTER);
 		add(tName, 0, 0);
 
+		//sets up the text for the armor
 		Text tArmor = new Text("Armor: " + charGUI.getArmor());
 		tArmor.setStyle("-fx-font: 20 ariel;");
 		GridPane.setColumnSpan(tArmor, 5);
 		GridPane.setHalignment(tArmor, HPos.CENTER);
 		add(tArmor, 0, 3);
 
+		//sets up the text for the initiative
 		Text tInt = new Text("Initiative: " + charGUI.getInitiative());
 		tInt.setStyle("-fx-font: 20 ariel;");
 		GridPane.setColumnSpan(tInt, 5);
@@ -64,6 +67,7 @@ public class Tracker extends GridPane {
 		add(tInt, 0, 4);
 	}
 
+	//sets up the information for the character that does change. I.E. the life
 	private void addLifeInteractables() {
 		Button minusLife = new Button("-");
 		minusLife.setPrefSize(30, 30);
@@ -93,10 +97,9 @@ public class Tracker extends GridPane {
 		add(currLife, 2, 1);
 		add(plusLife, 3, 1);
 		add(plusLifeTen, 4, 1);
-		
-		
 	}
 	
+	//sets up the information for the character that does change. I.E. the temporary life
 	private void addTempInteractables() {
 		//temp life
 		Button minusTemp = new Button("-");
@@ -130,17 +133,21 @@ public class Tracker extends GridPane {
 		add(plusTempTen, 4, 2);
 	}
 
+	//handles the event for when the user presses one of the minus buttons 
 	private void subtract(ActionEvent e) {
+		//if the source of the event came from a button then continue
 		if (e.getSource() instanceof Button) {
 			Button source = (Button) e.getSource();
-			if (source.getId() == "life_-10") {
+			
+			if (source.getId() == "life_-10") { //if the source is the minus 10 button then remove 10 life using a loop
 				for (int i = 0; i < 10; i++) {
 					charGUI.removeLife();
 				}
-			} else {
+			} else { //if the source is just the regular minus button then remove 1 life
 				charGUI.removeLife();
 			}
 			
+			//update the GUI texts
 			currLife.setText("" + charGUI.getCurr());
 		}
 	}
